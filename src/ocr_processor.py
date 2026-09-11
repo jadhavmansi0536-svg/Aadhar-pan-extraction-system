@@ -2,10 +2,12 @@ import cv2
 import pytesseract
 import shutil
 
+
 TESSERACT_PATH = (
     shutil.which("tesseract")
     or r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 )
+
 pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
 
 
@@ -29,5 +31,10 @@ def extract_text(image):
     processed_image = cv2.threshold(
         gray_image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU
     )[1]
-    text = pytesseract.image_to_string(processed_image, config="--psm 6")
+
+    text = pytesseract.image_to_string(
+        processed_image,
+        config="--psm 6"
+    )
+
     return text.strip()

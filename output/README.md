@@ -1,0 +1,1 @@
+Generated Excel files are stored here by the application. The included sample workbook is the generated `extracted_data.xlsx` file.

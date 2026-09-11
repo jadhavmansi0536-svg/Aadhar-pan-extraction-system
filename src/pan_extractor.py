@@ -17,7 +17,10 @@ def extract_pan_data(text):
     for i, line in enumerate(lines):
         if re.search(r"\bNAME\b", line, re.IGNORECASE):
             name = re.sub(r".*\bNAME\b\s*:?\s*", "", line, flags=re.IGNORECASE).strip()
-            result["Name"] = name or (lines[i + 1] if i + 1 < len(lines) else "")
+            if name:
+                result["Name"] = name
+            elif i + 1 < len(lines):
+                result["Name"] = lines[i + 1]
             break
 
     for i, line in enumerate(lines):
@@ -26,6 +29,10 @@ def extract_pan_data(text):
                 r".*(FATHER'?S?\s+NAME|FATHERS\s+NAME|FATHER\s+NAME)\s*:?\s*",
                 "", line, flags=re.IGNORECASE
             ).strip()
-            result["Father's Name"] = father_name or (lines[i + 1] if i + 1 < len(lines) else "")
+            if father_name:
+                result["Father's Name"] = father_name
+            elif i + 1 < len(lines):
+                result["Father's Name"] = lines[i + 1]
             break
+
     return result

@@ -51,9 +51,14 @@ Aadhar-pan-extraction-system/
 │   └── excel_exporter.py
 ├── sample_documents/
 │   └── create_samples.py
-└── output/
-    └── extracted_data.xlsx
+├── sample_aadhaar.png
+├── sample_aadhaar.pdf
+├── sample_pan.png
+├── sample_pan.pdf
+└── extracted_data.xlsx
 ```
+
+The sample generator creates test documents inside `sample_documents/` when run locally. The committed synthetic sample files are provided at the repository root for quick testing.
 
 ## Installation
 
@@ -112,9 +117,11 @@ python main.py
 4. Review the detected document type and extracted fields.
 5. Select a row to preview/edit the extracted values.
 6. Use **Save Correction** if a value needs correction.
-7. Click **Export Excel** to generate `output/extracted_data.xlsx`.
+7. Click **Export Excel** to generate the Excel output file.
 
 ## Excel Output
+
+The sample workbook included in the repository is `extracted_data.xlsx`. A new workbook is generated when Excel export is used.
 
 The exported workbook contains these columns:
 

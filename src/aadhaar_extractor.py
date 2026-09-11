@@ -2,9 +2,19 @@ import re
 
 
 def extract_aadhaar_data(text):
-    """Extract Aadhaar-related fields from OCR text."""
+    """
+    Extract Aadhaar-related fields from OCR text.
+    """
+
     lines = [line.strip() for line in text.splitlines() if line.strip()]
-    result = {"Name": "", "DOB": "", "Gender": "", "Aadhaar Number": "", "Address": ""}
+
+    result = {
+        "Name": "",
+        "DOB": "",
+        "Gender": "",
+        "Aadhaar Number": "",
+        "Address": ""
+    }
 
     aadhaar_match = re.search(r"\b\d{4}\s?\d{4}\s?\d{4}\b", text)
     if aadhaar_match:
@@ -21,7 +31,10 @@ def extract_aadhaar_data(text):
     for i, line in enumerate(lines):
         if re.search(r"\bNAME\b", line, re.IGNORECASE):
             name = re.sub(r".*\bNAME\b\s*:?\s*", "", line, flags=re.IGNORECASE).strip()
-            result["Name"] = name or (lines[i + 1] if i + 1 < len(lines) else "")
+            if name:
+                result["Name"] = name
+            elif i + 1 < len(lines):
+                result["Name"] = lines[i + 1]
             break
 
     for i, line in enumerate(lines):
@@ -38,4 +51,5 @@ def extract_aadhaar_data(text):
                 address_parts.append(next_line)
             result["Address"] = " ".join(address_parts)
             break
+
     return result

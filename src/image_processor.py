@@ -28,4 +28,5 @@ def preprocess_image(image):
     processed_image = cv2.threshold(
         denoised_image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU
     )[1]
+
     return processed_image

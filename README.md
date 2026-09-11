@@ -37,13 +37,15 @@ Aadhar-pan-extraction-system/
 ├── main.py
 ├── requirements.txt
 ├── README.md
-├── extracted_data.xlsx
-├── sample_aadhaar.png
-├── sample_aadhaar.pdf
-├── sample_pan.png
-├── sample_pan.pdf
+├── output/
+│   ├── extracted_data.xlsx
+│   └── README.md
 ├── sample_documents/
-│   └── create_samples.py
+│   ├── create_samples.py
+│   ├── sample_aadhaar.png
+│   ├── sample_aadhaar.pdf
+│   ├── sample_pan.png
+│   └── sample_pan.pdf
 └── src/
     ├── __init__.py
     ├── gui.py
@@ -117,7 +119,7 @@ To generate synthetic test documents:
 python sample_documents/create_samples.py
 ```
 
-The generated sample Aadhaar and PAN image/PDF files can then be selected from the GUI.
+The generated sample Aadhaar and PAN image/PDF files are stored in `sample_documents/` and can then be selected from the GUI.
 
 > The sample documents are synthetic test data and are not real identity documents.
 
@@ -141,6 +143,8 @@ The default application output path is:
 ```text
 output/extracted_data.xlsx
 ```
+
+A sample generated workbook is included in the same `output/` folder.
 
 ## Validation and Privacy
 

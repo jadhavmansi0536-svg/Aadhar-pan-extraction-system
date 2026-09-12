@@ -4,7 +4,7 @@ A modern, offline Graphical User Interface (GUI) application built with Python, 
 
 ---
 
-## 🌟 Key Features
+##  Key Features
 
 - **Multi-Format Document Upload**: Supports `.jpg`, `.jpeg`, `.png`, and `.pdf` files.
 - **Batch Processing**: Upload and extract multiple documents simultaneously.
@@ -29,7 +29,7 @@ A modern, offline Graphical User Interface (GUI) application built with Python, 
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 Aadhar-pan-extraction-system/
@@ -59,7 +59,7 @@ Aadhar-pan-extraction-system/
 
 ---
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 - **Language**: Python 3.10+
 - **GUI Framework**: `CustomTkinter`, `Tkinter`
@@ -70,7 +70,7 @@ Aadhar-pan-extraction-system/
 
 ---
 
-## 🚀 Installation & Setup
+##  Installation & Setup
 
 ### 1. Prerequisites
 - **Python 3.10 or higher**: Download from [python.org](https://www.python.org/).
@@ -86,7 +86,7 @@ pip install -r requirements.txt
 
 ---
 
-## 💻 How to Run the Application
+##  How to Run the Application
 
 Launch the application using Python:
 

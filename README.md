@@ -105,6 +105,6 @@ python main.py
 
 ---
 
-## 🔒 Security & Privacy Compliance
+##  Security & Privacy Compliance
 
 This system processes all documents **locally on the user's computer**. No document images or extracted data are uploaded to any external server or third-party cloud service. Aadhaar numbers are automatically masked as required by Indian privacy guidelines.

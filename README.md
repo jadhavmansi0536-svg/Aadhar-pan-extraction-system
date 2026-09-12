@@ -1,159 +1,110 @@
-# Aadhaar & PAN Data Extraction System
+# Aadhaar and PAN Card Data Extraction and Excel Generation System
 
-A desktop Python application that extracts Aadhaar and PAN card information from images and PDF documents using OCR, identifies the document type automatically, allows corrections, and exports the final data to Excel.
+A modern, offline Graphical User Interface (GUI) application built with Python, CustomTkinter, OpenCV, PyMuPDF, and Tesseract OCR to automatically extract personal data from Indian Aadhaar Cards and PAN Cards (Images & PDFs) and export structured results to Excel.
 
-## Features
+---
 
-- Upload single or multiple JPG, JPEG, PNG, and PDF documents
-- Automatic Aadhaar/PAN document identification
-- OCR using Tesseract
-- OpenCV image preprocessing for OCR
-- PDF page conversion using PyMuPDF
-- Aadhaar field extraction: Name, DOB, Gender, Aadhaar Number, Address
-- PAN field extraction: Name, Father's Name, DOB, PAN Number
-- Editable extracted-data table for OCR corrections
-- Aadhaar masking in the GUI/export by default
-- Batch processing of multiple documents
-- Excel export with formatted columns
-- Synthetic sample document generator for testing
-- Local processing; documents are not sent to a remote OCR service
+## 🌟 Key Features
 
-## Technology Stack
+- **Multi-Format Document Upload**: Supports `.jpg`, `.jpeg`, `.png`, and `.pdf` files.
+- **Batch Processing**: Upload and extract multiple documents simultaneously.
+- **Automatic Document Identification**: Automatically detects whether a document is an **Aadhaar Card** or a **PAN Card** using intelligent keyword scoring and pattern matching.
+- **Robust Field Extraction**:
+  - **PAN Card**: Name, Father's Name, Date of Birth (DOB), PAN Number (`ABCDE1234F`).
+  - **Aadhaar Card**: Name, Date of Birth (DOB), Gender, Aadhaar Number (`12-digit`), Address.
+- **Support for Diverse Layouts & Formats**:
+  - **Classic Unlabeled PAN Cards**: Uses layout heuristics to detect Holder Name and Father's Name even when labels like `Name:` are missing.
+  - **Modern Bilingual Cards**: Handles dual-language labels (`नाम / Name`, `पिता का नाम / Father's Name`) cleanly.
+  - **Smartphone Photo Support**: Auto-orients camera photos respecting EXIF metadata.
+  - **Digital PDF Parsing**: Extracts text directly from e-PAN / e-Aadhaar vector PDFs without OCR degradation.
+  - **OCR Typos & Character Correction**: Auto-corrects common OCR character confusions in numbers and names (e.g. `0` vs `O`, `1` vs `I`).
+- **Data Validation & Privacy**:
+  - 100% **Local / Offline Processing** (no cloud API, ensuring privacy for sensitive PII data).
+  - **Aadhaar Masking**: Aadhaar numbers are masked by default (`XXXX XXXX 1234`) with a toggle to view full numbers.
+  - Regex validation for PAN format, Aadhaar format, and DOB format.
+- **Interactive GUI**:
+  - Document image/page preview.
+  - Live data table with manual edit/correction capabilities.
+  - One-click export to Excel (`.xlsx`).
 
-- Python
-- CustomTkinter / Tkinter
-- OpenCV
-- Tesseract OCR / pytesseract
-- PyMuPDF
-- Regular Expressions
-- Pandas
-- OpenPyXL
-- Pillow
+---
 
-## Project Structure
+## 📁 Project Structure
 
-```text
+```
 Aadhar-pan-extraction-system/
-├── main.py
-├── requirements.txt
-├── README.md
-├── output/
-│   ├── extracted_data.xlsx
-│   └── README.md
-├── sample_documents/
-│   ├── create_samples.py
+├── main.py                     # Main application entry point
+├── requirements.txt            # Python dependencies
+├── README.md                   # Project documentation & execution guide
+├── sample_documents/           # Synthetic sample documents for testing
+│   ├── create_samples.py       # Script to generate sample cards
 │   ├── sample_aadhaar.png
 │   ├── sample_aadhaar.pdf
 │   ├── sample_pan.png
 │   └── sample_pan.pdf
-└── src/
+├── output/                     # Generated Excel files output folder
+│   └── extracted_data.xlsx
+└── src/                        # Source code package
     ├── __init__.py
-    ├── gui.py
-    ├── image_processor.py
-    ├── ocr_processor.py
-    ├── pdf_processor.py
-    ├── document_identifier.py
-    ├── aadhaar_extractor.py
-    ├── pan_extractor.py
-    ├── validator.py
-    └── excel_exporter.py
+    ├── gui.py                  # CustomTkinter GUI interface & application logic
+    ├── image_processor.py     # Image loading, EXIF orientation & preprocessing
+    ├── ocr_processor.py        # Tesseract OCR engine integration (multi-pass)
+    ├── pdf_processor.py        # PDF text extraction & image rendering (PyMuPDF)
+    ├── document_identifier.py # Document classification engine (Aadhaar vs PAN)
+    ├── pan_extractor.py       # PAN card field extraction & layout parsing
+    ├── aadhaar_extractor.py   # Aadhaar card field extraction & layout parsing
+    ├── validator.py           # Format validation & Aadhaar masking functions
+    └── excel_exporter.py      # Pandas & OpenPyXL Excel export module
 ```
 
-## Installation
+---
 
-1. Install Python 3.10 or newer.
-2. Install Tesseract OCR.
-3. Open a terminal in the project folder.
-4. Create and activate a virtual environment.
-5. Install the Python dependencies:
+## 🛠️ Technology Stack
 
-```bash
+- **Language**: Python 3.10+
+- **GUI Framework**: `CustomTkinter`, `Tkinter`
+- **Computer Vision & Image Processing**: `OpenCV (cv2)`, `Pillow (PIL)`
+- **PDF Engine**: `PyMuPDF (fitz)`
+- **OCR Engine**: `Tesseract OCR` (via `pytesseract`)
+- **Data & Excel Handling**: `Pandas`, `OpenPyXL`
+
+---
+
+## 🚀 Installation & Setup
+
+### 1. Prerequisites
+- **Python 3.10 or higher**: Download from [python.org](https://www.python.org/).
+- **Tesseract OCR**:
+  - **Windows**: Download installer from [UB-Mannheim Tesseract Wiki](https://github.com/UB-Mannheim/tesseract/wiki) and install to default location (`C:\Program Files\Tesseract-OCR\tesseract.exe`).
+
+### 2. Install Dependencies
+Open terminal or PowerShell in the project directory and run:
+
+```powershell
 pip install -r requirements.txt
 ```
 
-### Tesseract on Windows
+---
 
-The application automatically looks for Tesseract in PATH and also supports the standard Windows installation path:
+## 💻 How to Run the Application
 
-```text
-C:\Program Files\Tesseract-OCR\tesseract.exe
-```
+Launch the application using Python:
 
-If Tesseract is installed somewhere else, update `TESSERACT_PATH` in `src/ocr_processor.py`.
-
-## Run the Application
-
-From the project root:
-
-```bash
+```powershell
 python main.py
 ```
 
-The GUI workflow is:
+### Step-by-Step Usage Guide:
+1. **Upload Documents**: Click **"Upload Documents"** and select one or more image (`.png`, `.jpg`, `.jpeg`) or PDF files.
+2. **Extract Data**: Click **"Extract Data"** to automatically process the uploaded files.
+3. **Review & Edit**:
+   - Select any row in the table to view the document preview.
+   - Use the bottom edit panel to manually correct any field if needed.
+   - Toggle **"Show Full Aadhaar"** to unmask Aadhaar numbers if required.
+4. **Export to Excel**: Click **"Export Excel"** to save the structured output to `output/extracted_data.xlsx`.
 
-```text
-Upload Documents
-      ↓
-Image/PDF Processing
-      ↓
-Image Enhancement
-      ↓
-OCR
-      ↓
-Document Identification
-      ↓
-Field Extraction
-      ↓
-Data Validation / Correction
-      ↓
-Display in Table
-      ↓
-Export to Excel
-```
+---
 
-## Generate Sample Documents
+## 🔒 Security & Privacy Compliance
 
-To generate synthetic test documents:
-
-```bash
-python sample_documents/create_samples.py
-```
-
-The generated sample Aadhaar and PAN image/PDF files are stored in `sample_documents/` and can then be selected from the GUI.
-
-> The sample documents are synthetic test data and are not real identity documents.
-
-## Excel Output
-
-The exported workbook contains:
-
-- S.No
-- Document Type
-- Name
-- Father's Name
-- DOB
-- Gender
-- Aadhaar Number
-- PAN Number
-- Address
-- File Name
-
-The default application output path is:
-
-```text
-output/extracted_data.xlsx
-```
-
-A sample generated workbook is included in the same `output/` folder.
-
-## Validation and Privacy
-
-PAN numbers are checked against the standard `ABCDE1234F` pattern. Aadhaar numbers are checked for a 12-digit format, and dates are validated using `DD/MM/YYYY` format.
-
-Aadhaar numbers are masked by default so that only the last four digits are displayed/exported unless full Aadhaar display is explicitly enabled in the application.
-
-This project is intended for demonstration and educational use with authorized documents and synthetic samples.
-
-## Author
-
-Mansi Jadhav
+This system processes all documents **locally on the user's computer**. No document images or extracted data are uploaded to any external server or third-party cloud service. Aadhaar numbers are automatically masked as required by Indian privacy guidelines.

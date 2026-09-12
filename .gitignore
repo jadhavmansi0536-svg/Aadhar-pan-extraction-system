@@ -1,36 +1,22 @@
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-
-# Virtual environments
+# Virtual environment
 .venv/
 venv/
-env/
 ENV/
+env/
 
-# Environment and secrets
-.env
-.envrc
+# Python bytecode / cache
+__pycache__/
+*.pyc
+*.py[cod]
+*$py.class
 
-# IDE / editor
-.vscode/
+# Temporary archives & copies
+Aadhar-pan-extraction-system_All_Files.zip
+* - Copy.py
+*.log
+
+# IDE & OS files
 .idea/
-
-# Test / cache files
-.pytest_cache/
-.coverage
-.coverage.*
-htmlcov/
-.ruff_cache/
-
-# Temporary files
-tempCodeRunnerFile.py
-*.tmp
-
-# Local generated output
-output/*.xlsx
-
-# OS files
+.vscode/
 .DS_Store
 Thumbs.db
